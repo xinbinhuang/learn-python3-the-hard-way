@@ -2,13 +2,13 @@
 import os
 
 # specify the start and end point of the files
-n = 3
-end = 55
+n = 5
+end = 56
 
-print("Starting point:", "3")
+print(f"Starting point: {n}")
 # Just to create a bunch of exercise files.
 while n < end:
-    filename="ex" + str(n) + ".py"
+    filename=f"ex{n}.py"
     folder="exercise"
     file_path=os.path.join(folder, filename)
     create_file="touch " + file_path
