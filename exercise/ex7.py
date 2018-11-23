@@ -1,7 +1,7 @@
 print("Mary had a little lamb.")
 print("Its fleece was white as {}".format('snow'))
 print("And everywhere that Mary went.")
-print("." * 10) # what'd that do? multiply "." ten times
+print("." * 10)  # what'd that do? multiply "." ten times
 
 end1 = "C"
 end2 = "h"
