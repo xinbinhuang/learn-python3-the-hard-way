@@ -25,7 +25,7 @@ print('OR State has', cities['OR'])
 
 # print some states
 print('-' * 10)
-print('Michigan\'s abbreviation is: ', states['Michigan'] )
+print('Michigan\'s abbreviation is: ', states['Michigan'])
 print('Florida\'s abbreviation is: ', states['Florida'])
 
 # do it by using the state then cities dict

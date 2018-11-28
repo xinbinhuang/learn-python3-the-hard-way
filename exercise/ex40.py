@@ -1,20 +1,21 @@
 # OOP
 
-## 1. Dictionary
-## =================================
+# 1. Dictionary
+# =================================
 mystuff = {'apple': 'I AM APPLES!'}
 print(mystuff['apple'])
 
 
-## 2. Module
-## =================================
+# 2. Module
+# =================================
 import mystuff
 
 mystuff.apple()
 print(mystuff.tangerine)
 
-## 3. Class
-## =================================
+# 3. Class
+# =================================
+
 
 class MyStuff(object):
 
