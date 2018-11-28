@@ -1,13 +1,28 @@
 # /usr/bin/env python
 import os
 
-# specify the start and end point of the files
-n = 1
-end = 56
 
-print(f"Starting point: {n}")
-# Just to create a bunch of exercise files.
-while n < end:
+def confirm_create():
+    msg = f"Create files from `ex{start}.py` to `ex{end}.py`? ([yes]/no) :"
+    yes = input(msg).lower().strip()
+
+    if yes in ['yes', 'y', '']:
+        yes = True
+    elif yes in ['no', 'n']:
+        yes = False
+    else:
+        yes = confirm_create()
+
+    return yes
+
+
+# specify the start and end point of the files
+start = n = 1
+end = 52
+
+# Ask for user input to confirm create files
+yes = confirm_create()
+while n <= end and yes:
     filename = f"ex{n}.py"
     folder = "exercise"
     file_path = os.path.join(folder, filename)
@@ -19,4 +34,7 @@ while n < end:
 
     n += 1
 
-print("The last file created : {0}".format(file_path))
+try:
+    print('Job finished. Bye~')
+except NameError:
+    print('No files were created. Bye~')
