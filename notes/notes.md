@@ -103,3 +103,99 @@ chr(113)
     ...     name=name, error=hex(errno))
     'Hey Bob, there is a 0xbadc0ffee error!'
     ```
+
+## Basic Object-Oriented Analysis and Design
+
+### [1] Bottom Up approach
+
+ 1. Take a small piece of the problem; hack on some code and get it to run barely.
+ 2. Refine the code into something more formal with classes and automated tests.
+ 3. Extract the key concepts you’re using and try to find research for them.
+ 4. Write a description of what’s really going on.
+ 5. Go back and refine the code, possibly throwing it out and starting over.
+ 6. Repeat, moving on to some other piece of the problem.
+
+### [1] Top Down approach
+
+ 1. Write or draw about the problem.
+ 2. Extract key concepts from 1 and research them.
+ 3. Create a class hierarchy and object map for the concepts.
+ 4. Code the classes and a test to run them.
+ 5. Repeat and refine.
+
+## Class Inheritance vs. Composition
+
+### Inheritance
+
+> In object-oriented programming, inheritance is the evil forest. Experienced programmers know to avoid this evil because they know that deep inside the Dark Forest Inheritance is the Evil Queen Multiple Inheritance. She likes to eat software and programmers with her massive complexity teeth, chewing on the flesh of the fallen. But the forest is so powerful and so tempting that nearly every programmer has to go into it and try to make it out alive with the Evil Queen’s head before they can call themselves real programmers. You just can’t resist the Inheritance Forest’s pull, so you go in. After the adventure you learn to just stay out of that stupid forest and bring an army if you are ever forced to go in again.
+
+Actually:
+**Most of the uses of inheritance can be simplified or replaced with composition, and multiple inheritance should be avoided at all costs.**
+
+Some simple rules:
+
+1. Avoid multiple inheritance at all costs, as it’s too complex to be reliable. If you’re stuck with it, then be prepared to know the class hierarchy and spend time finding where everything is coming from.
+2. Use composition to package code into modules that are used in many different unrelated places and situations.
+3. Use inheritance only when there are clearly related reusable pieces of code that fit under a single common concept or if you have to because of something you’re using.
+
+### Multiple inheritance
+
+```python
+class SuperFun(Child, BadStuff):
+    pass
+```
+
+In this case, whenever you have implicit actions on any SuperFun instance, Python has to look-up the possible function in the class hierarchy for both `Child` and `BadStuff`, but it needs to do this in a consistent order --- uses ”method resolution order” (MRO) and an algorithm called `C3`.
+
+To deal with this:
+
+1. refactor your code to exclude multiple inheritance
+2. use `super()`
+    ```python
+    class Child(Parent):
+        # do `Child.__init__` first, then
+        # do `Parent.__init__`
+        def __init__(self, stuff):
+            self.stuff = stuff
+            super().__init__()
+    ```
+
+### Composition
+
+Use other classes and modules to replace inheritance.
+
+```python
+class Other(object):
+
+    def override(self):
+        print("OTHER override()")
+
+    def implicit(self):
+        print("OTHER implicit()")
+
+    def altered(self):
+        print("OTHER altered()")
+
+
+class Child(object):
+
+    def __init__(self):
+        self.other = Other()
+
+    def implicit(self):
+        self.other.implicit()
+
+    def overried(self):
+        self.other.implicit()
+
+    def altered(self):
+        print("CHILD, BEFORE OTHER altered()")
+        self.other.altered()
+        print("CHILD, AFTER OTHER altered())")
+
+
+son = Child()
+son.implicit()
+son.override()
+son.altered()
+```
