@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if greeting %}
+    I just wanted to say
+    <em style="color: green; font-size: 2em;">{{ greeting }}</em>.
+{% else %}
+    <em>Hello</em>, world!
+{% endif %}
+
+    <p>
+        To refill the <a href="/hello">form</a>.
+    </p>
+
+    <p>
+        <em>
+            To learn more about <a href=/foo>Foo</a> ;)
+        </em>
+    </p>
+
+{% endblock %}
+
+

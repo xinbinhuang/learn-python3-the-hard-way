@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <p>Who is foo?</p>
+
+{% for f in foo %}
+    <p>
+        <b style="color: red; font-size: 2em;">{{ f }}</b>.
+    </p>
+{% endfor %}
+
+{% endblock %}
+
+
+
