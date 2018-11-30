@@ -1,0 +1,39 @@
+1 from nose.tools import *
+2 from gothonweb.planisphere import *
+3
+4 def test_room():
+5 gold = Room("GoldRoom",
+6 """This room has gold in it you can grab. There's a
+7 door to the north.""")
+8 assert_equal(gold.name, "GoldRoom")
+9 assert_equal(gold.paths, {})
+10
+11 def test_room_paths():
+12 center = Room("Center", "Test room in the center.")
+13 north = Room("North", "Test room in the north.")
+14 south = Room("South", "Test room in the south.")
+15
+16 center.add_paths({'north': north, 'south': south})
+17 assert_equal(center.go('north'), north)
+18 assert_equal(center.go('south'), south)
+19
+20 def test_map():
+21 start = Room("Start", "You can go west and down a hole.")
+22 west = Room("Trees", "There are trees here, you can go east.")
+23 down = Room("Dungeon", "It's dark down here, you can go up.")
+24
+25 start.add_paths({'west': west, 'down': down})
+26 west.add_paths({'east': start})
+27 down.add_paths({'up': start})
+28
+29 assert_equal(start.go('west'), west)
+30 assert_equal(start.go('west').go('east'), start)
+31 assert_equal(start.go('down').go('up'), start)
+32
+33 def test_gothon_game_map():
+34 start_room = load_room(START)
+35 assert_equal(start_room.go('shoot!'), generic_death)
+36 assert_equal(start_room.go('dodge!'), generic_death)
+37
+38 room = start_room.go('tell a joke')
+39 assert_equal(room, laser_weapon_armory)
