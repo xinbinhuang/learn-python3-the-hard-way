@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # A script for easy copy-pasting code chunk from the original book
 # This remove all trailing line numbers from the original text.
-# Example usage: python utils.py input.txt output.txt
+# Example usage: python clean.py input.txt output.txt
 import re
 from sys import argv
 
